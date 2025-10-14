@@ -1,0 +1,96 @@
+import os 
+import yaml 
+from ensure import ensure_annotations
+from box import ConfigBox
+from pathlib import Path
+from src import logging, CustomException
+import json
+from typing import Any 
+import joblib
+
+@ensure_annotations
+def read_yaml(yaml_path: Path) -> ConfigBox:
+    try:
+        with open(yaml_path, "r") as f:
+            content = yaml.safe_load(f)
+            logging.info(f"reading the content of '{yaml_path}'")
+            return ConfigBox(content)
+
+    except Exception as e:
+        raise CustomException(e) from e
+    
+@ensure_annotations
+def create_directories(path_to_directories: list, verbose=True):
+    """reads yaml file and returns
+
+    Args:
+        path_to_yaml (str): path like input
+
+    Raises:
+        ValueError: if yaml file is empty
+        e: empty file
+
+    Returns:
+        ConfigBox: ConfigBox type
+    """
+    for path in path_to_directories:
+        os.makedirs(path, exist_ok=True)
+        if verbose:
+            logging.info(f"created directory at: {path}")
+            
+            
+@ensure_annotations
+def save_json(path: Path, data: dict):
+    """save json data
+
+    Args:
+        path (Path): path to json file
+        data (dict): data to be saved in json file
+    """
+    with open(path, "w") as f:
+        json.dump(data, f, indent=4)
+
+    logging.info(f"json file saved at: {path}")
+    
+    
+    
+@ensure_annotations
+def save_bin(data: Any, path: Path):
+    """save binary file
+
+    Args:
+        data (Any): data to be saved as binary
+        path (Path): path to binary file
+    """
+    joblib.dump(data, path)
+    logging.info(f"binary file saved at: {path}")
+
+
+@ensure_annotations
+def load_bin(path: Path) -> Any:
+    """load binary data
+
+    Args:
+        path (Path): path to binary file
+
+    Returns:
+        Any: object stored in the file
+    """
+    data = joblib.load(path)
+    logging.info(f"binary file loaded from: {path}")
+    return data
+
+
+
+@ensure_annotations
+def get_size(path: Path) -> str:
+    """get size in KB
+
+    Args:
+        path (Path): path of the file
+
+    Returns:
+        str: size in KB
+    """
+    size_in_kb = round(os.path.getsize(path)/1024)
+    return f"~ {size_in_kb} KB"
