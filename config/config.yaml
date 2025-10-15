@@ -5,3 +5,16 @@ data_ingestion:
   source_url: https://github.com/youssefBedeer/data-repository/raw/refs/heads/main/Telco-Customer-Churn.zip
   local_data_file: artifacts/data_ingestion/data.zip
   unzip_dir: artifacts/data_ingestion
+
+data_validation:
+  root_dir: artifacts/data_validation 
+  STATUS_FILE: artifacts/status.txt
+  data_dir: artifacts/data_ingestion/Telco-Customer-Churn.csv 
+
+data_transformation:
+  root_dir: artifacts/data_transformation 
+  data_path: artifacts/data_ingestion/Telco-Customer-Churn.csv
+  train_path: artifacts/data_transformation/train.csv
+  test_path: artifacts/data_transformation/test.csv
+  transformer_path: artifacts/data_transformation/preprocessor.joblib
+

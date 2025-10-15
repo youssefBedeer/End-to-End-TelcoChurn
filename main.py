@@ -1,6 +1,7 @@
 from src import logging, CustomException 
 
 from src.pipeline.stage_01_data_ingestion import DataIngestionPipeline 
+from src.pipeline.stage_02_data_validation import DataValidationPipeline
 
 STAGE_NAME = "Data Ingestion stage"
 try:
@@ -11,3 +12,18 @@ try:
 
 except Exception as e:
     raise CustomException(e)
+
+
+
+STAGE_NAME = "Data Validation stage"
+try:
+    logging.info(f"\n{'>'*20} stage {STAGE_NAME} started {'<'*20}\n")
+    data_validation = DataValidationPipeline() 
+    data_validation.main()
+    logging.info(f"\n{'>'*20} stage {STAGE_NAME} completed {'<'*20}\n")
+
+except Exception as e:
+    raise CustomException(e)
+
+
+
