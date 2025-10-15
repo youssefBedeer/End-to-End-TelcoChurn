@@ -15,3 +15,18 @@ class DataValidationConfig:
     STATUS_FILE: str 
     data_dir: Path 
     all_schemas: dict
+    
+    
+from dataclasses import dataclass 
+from pathlib import Path 
+
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    root_dir: Path 
+    data_path: Path
+    transformer_path: Path
+    target_name: str
+    X_train_path: Path 
+    X_test_path: Path 
+    y_train_path: Path 
+    y_test_path: Path
