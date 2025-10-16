@@ -30,3 +30,18 @@ class DataTransformationConfig:
     X_test_path: Path 
     y_train_path: Path 
     y_test_path: Path
+    
+    
+    
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    root_dir:Path 
+    model_name: str
+    target_column: str 
+    all_params:dict
+    X_train_path : Path 
+    X_test_path : Path
+    y_train_path : Path
+    y_test_path :Path
+    THRESHOLD : float
+    best_params_path : Path

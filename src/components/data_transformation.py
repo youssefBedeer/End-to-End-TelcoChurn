@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 import joblib
 from src import logging
 from src.entity.config_entity import DataTransformationConfig
+from scipy import sparse
 
 class DataTransformation:
     def __init__(self, config: DataTransformationConfig):
@@ -85,9 +86,9 @@ class DataTransformation:
         with open(self.config.transformer_path, "wb") as f:
             joblib.dump(preprocessing_obj, f)
 
-        # --- Optionally save splits ---
-        X_train.to_csv(self.config.X_train_path, index=False)
-        X_test.to_csv(self.config.X_test_path, index=False)
+        # --- save splits ---
+        sparse.save_npz(file=self.config.X_train_path, matrix=X_train_arr)
+        sparse.save_npz(file=self.config.X_test_path,  matrix=X_test_arr)
         y_train.to_csv(self.config.y_train_path, index=False)
         y_test.to_csv(self.config.y_test_path, index=False)
 

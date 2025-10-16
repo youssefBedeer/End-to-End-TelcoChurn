@@ -2,7 +2,7 @@ from src.constants import *
 from src.utils import read_yaml, create_directories 
 
 from src.entity.config_entity import(DataIngestionConfig, DataTransformationConfig,
-                                    DataValidationConfig,)
+                                    DataValidationConfig, ModelTrainerConfig,)
 
 
 
@@ -57,4 +57,25 @@ class ConfigurationManager:
             X_test_path=Path(config.X_test_path),
             y_train_path=Path(config.y_train_path),
             y_test_path=Path(config.y_test_path)
+        )
+        
+        
+    def get_model_trainer(self) -> ModelTrainerConfig:
+        config = self.config.model_trainer 
+        params = self.params.xgboost_params
+        schema = self.schema.TARGET_COLUMN
+        
+        create_directories([config.root_dir])
+        
+        return ModelTrainerConfig(
+            root_dir= Path(config.root_dir),
+            model_name=config.model_name,
+            target_column = schema.name,
+            all_params = params,
+            X_train_path = Path(config.X_train_path),
+            X_test_path = Path(config.X_test_path),
+            y_train_path= Path(config.y_train_path),
+            y_test_path= Path(config.y_test_path),
+            best_params_path= Path(config.best_params_path),
+            THRESHOLD = config.THRESHOLD,
         )
