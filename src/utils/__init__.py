@@ -41,16 +41,14 @@ def create_directories(path_to_directories: list, verbose=True):
             
 @ensure_annotations
 def save_json(path: Path, data: dict):
-    """save json data
+    """Save a dictionary as a JSON file."""
+    # Ensure parent directory exists
+    path.parent.mkdir(parents=True, exist_ok=True)
 
-    Args:
-        path (Path): path to json file
-        data (dict): data to be saved in json file
-    """
     with open(path, "w") as f:
         json.dump(data, f, indent=4)
 
-    logging.info(f"json file saved at: {path}")
+    logging.info(f"JSON file saved at: {path}")
     
     
     

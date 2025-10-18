@@ -17,7 +17,7 @@ class ModelTrainer:
         self.config = config 
         
         
-    def get_best_params(self, n_trials=30):
+    def get_best_params(self, n_trials=5):
         """Optuna hyperparameter tuning"""
         logging.info("Find best params")
         params_config = self.config.all_params

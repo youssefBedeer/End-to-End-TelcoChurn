@@ -29,5 +29,14 @@ model_trainer:
   X_test_path: artifacts/data_transformation/X_test.npz
   y_train_path: artifacts/data_transformation/y_train.csv
   y_test_path: artifacts/data_transformation/y_test.csv
-  best_params_path: artifacts/model_trainer/best_params.yaml
+  best_params_path: best_params.yaml
   THRESHOLD : 0.30
+
+model_evaluation:
+  root_dir: artifacts/data_evaluation
+  model_path: artifacts/model_trainer/model.joblib
+  X_test_path: artifacts/data_transformation/X_test.npz
+  y_test_path: artifacts/data_transformation/y_test.csv
+  best_params_path: best_params.yaml
+  THRESHOLD : 0.30
+  metric_file_name : artifacts/model_evaluation/scores.json

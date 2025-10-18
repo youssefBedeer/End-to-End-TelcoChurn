@@ -4,9 +4,6 @@ import os
 from pathlib import Path
 from datetime import datetime
 
-# for logging emoji in terminal
-import io
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 # -----------------------------
 # Logging Setup
